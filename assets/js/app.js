@@ -2,12 +2,11 @@
 	var app = angular.module('movie', []);
 
 	app.controller('MovieCtrl', function($scope, $http) {
-		$scope.movieName;
-
+		
 		$scope.search = function(searchMovie) {
-			$scope.movieName = angular.copy(searchMovie);
+			$scope.api = 'http://www.omdbapi.com/?t=' + $scope.searchMovie + '&y=&plot=short&r=json';
 
-			$http.get('http://www.omdbapi.com/?t=' + $scope.movieName + '&y=&plot=short&r=json')
+			$http.get($scope.api)
 				.success(function(data) {
 					$scope.name = data.Title;
 					$scope.release = data.Released;
